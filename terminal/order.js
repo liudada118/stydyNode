@@ -1,0 +1,6 @@
+const fs = require('fs')
+const path = require('path')
+const args = process.argv.splice(2)
+var command = args.shift()
+var taskDescription = args.join(' ')
+var file = path.join(process.cwd())
