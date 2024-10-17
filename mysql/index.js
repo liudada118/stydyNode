@@ -37,7 +37,7 @@ var server = http.createServer(function (req, res) {
     }
 })
 
-ab.query(
+db.query(
     "CREATE TABLE IF NOT EXISTS work ("
     + "id INT(10) NOT NULL AUTO_INCREMENT"
     + "hours DECIMAL(5, 2) DEFAULT 0,"
