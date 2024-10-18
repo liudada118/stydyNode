@@ -1,6 +1,6 @@
 const http = require('http')
 const work = require('./lib/timetrack')
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
 const db = mysql.createConnection({
     host: "127.0.0.1",
