@@ -5,7 +5,7 @@ const mysql = require('mysql2')
 const db = mysql.createConnection({
     host: "127.0.0.1",
     user: "root",
-    password: 'admin',
+    password: 'admin123',
     database: 'timetrack'
 })
 
@@ -14,39 +14,40 @@ var server = http.createServer(function (req, res) {
         case 'POST':
             switch (req.url) {
                 case '/':
-                    work.add(db, res, req);
+                    work.add(db,req, res);
                     break;
                 case '/archive':
-                    work.archive(db, res, req);
+                    work.archive(db,req, res);
                     break;
                 case '/delete':
-                    work.delete(db, res, req)
+                    work.delete(db,req, res)
             }
 
         case "GET":
             switch (req.url) {
                 case '/':
-                    work.show(db, res, req);
+                    work.show(db, res);
                     break;
                 case '/archive':
-                    work.archive(db, res, req);
+                    work.showArchived(db, res);
                     break;
             }
-        default:
-            badRequest(res)
+        // default:
+        //     badRequest(res)
     }
 })
 
 db.query(
     "CREATE TABLE IF NOT EXISTS work ("
-    + "id INT(10) NOT NULL AUTO_INCREMENT"
+    + "id INT(10) NOT NULL AUTO_INCREMENT,"
     + "hours DECIMAL(5, 2) DEFAULT 0,"
     + "date DATE,"
     + "archived INT(1) DEFAULT 0,"
     + "description LONGTEXT,"
     + "PRIMARY KEY(id))",
-    function (err) {
+    function (err,result) {
         if (err) throw err;
-        console.log('Serverstarted...'); server.listen(3000, '127.0.0.1');
+        console.log('Serverstarted...'); 
+        server.listen(3000, '127.0.0.1');
     }
 )
