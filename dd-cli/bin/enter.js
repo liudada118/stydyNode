@@ -2,7 +2,7 @@
 
 const lib = require('./cli-lib')
 const {program} = require('commander')
-const Inquirer = require('inquirer')
+const inquirer = require('inquirer')
 const argv = require('process').argv
 
 program.parse(process.argv)
@@ -23,7 +23,7 @@ console.log(
   )
 );
 
-new Inquirer.prompt([
+inquirer.default.prompt([
     {
       name: "vue",
       // 多选交互功能
@@ -50,7 +50,21 @@ new Inquirer.prompt([
     console.log(data);
   });
   
+const ora = require('ora')
 
+const spinner = ora('loading spiner')
+
+spinner.start();
+setTimeout(() => {
+  spinner.color = "yellow";
+  spinner.text = "Loading rainbows";
+  // loading 成功
+spinner.succeed();
+}, 1000);
+
+
+// loading 失败
+// spinner.fail();
 // if(command.startsWith('--') || command.startsWith('-')){
 //     const globalOption = command.replace(/--|-/g , '')
 //     if(globalOption == 'version' || globalOption == 'V'){
